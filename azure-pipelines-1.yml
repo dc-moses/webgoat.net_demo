@@ -25,6 +25,12 @@ steps:
   inputs:
     solution: '$(solution)'
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      Powershell “[Net.ServicePointManager]::SecurityProtocol = 'tls12'; irm  https://detect.synopsys.com/detect.ps1?$(Get-Random) | iex; detect” --blackduck.url=https://hubtesting.blackducksoftware.com
+      --blackduck.api.token=MzJkZWRlZWMtYTBlZC00MTgzLTg0ZmItOGI3YjBjNmQzOGYxOjFjZTgzNDJkLTY0MWItNGY0OC05N2ViLWVlM2EwYjY4YmE2Yg==
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
