@@ -30,7 +30,7 @@ steps:
     targetType: 'inline'
     script: |
       Powershell “[Net.ServicePointManager]::SecurityProtocol = 'tls12'; irm  https://detect.synopsys.com/detect.ps1?$(Get-Random) | iex; detect” --blackduck.url=https://hubtesting.blackducksoftware.com
-      --blackduck.api.token=MzJkZWRlZWMtYTBlZC00MTgzLTg0ZmItOGI3YjBjNmQzOGYxOjFjZTgzNDJkLTY0MWItNGY0OC05N2ViLWVlM2EwYjY4YmE2Yg==
+      --blackduck.api.token=$(Black Duck API token)
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
